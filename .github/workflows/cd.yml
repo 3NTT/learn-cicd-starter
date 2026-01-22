@@ -33,11 +33,10 @@ jobs:
         run: gcloud info
 
       - name: Build and push Docker image
-        run: gcloud builds submit --tag REGION-docker.pkg.dev/PROJECT_ID/REPOSITORY/IMAGE:TAG .
+        run: gcloud builds submit --tag "$REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$TAG" .
         env:
           REGION: ${{ secrets.GCP_REGION }}
           PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
           REPOSITORY: notely-ar-repo
           IMAGE: notely
           TAG: ${{ github.sha }}
-
